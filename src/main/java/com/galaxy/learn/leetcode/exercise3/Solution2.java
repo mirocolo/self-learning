@@ -11,7 +11,7 @@ import java.util.Set;
  * 滑动窗口
  */
 @Component("exercise3Solution2")
-public class Solution2 implements SolutionInterface {
+public class Solution2 implements LongestSubstringWithoutRepeatingCharactersInterface {
 
 	@Override
 	@MethodMonitorAnnotation

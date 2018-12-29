@@ -11,7 +11,7 @@ import java.util.Map;
  * 滑动窗口优化版本 Java (Using HashMap)
  */
 @Component("exercise3Solution3")
-public class Solution3 implements SolutionInterface {
+public class Solution3 implements LongestSubstringWithoutRepeatingCharactersInterface {
 
 	@Override
 	@MethodMonitorAnnotation

@@ -5,6 +5,6 @@ package com.galaxy.learn.leetcode.exercise3;
  *
  * @author He Xin
  */
-public interface SolutionInterface {
+public interface LongestSubstringWithoutRepeatingCharactersInterface {
 	int lengthOfLongestSubstring(String s);
 }

@@ -16,14 +16,16 @@ import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created on 2018/12/26.
  *
  * @author He Xin
  */
+@Slf4j
 @Component
 @Aspect
 public class MethodMeasureAspect {
@@ -38,14 +40,14 @@ public class MethodMeasureAspect {
 		Object obj = null;
 		String className = joinPoint.getTarget().getClass().getSimpleName();
 		String methodName = getMethodName(joinPoint);
-		long startTime = System.nanoTime();
+		long startTime = System.currentTimeMillis();
 		try {
 			obj = joinPoint.proceed();
 		} catch (Throwable t) {
 			Loggers.errorLogger.error(t.getMessage(), t);
 		} finally {
-			long costTime = System.nanoTime() - startTime;
-//			log.info("class={}, method={}, cost_time={}ms", className, methodName, costTime);
+			long costTime = System.currentTimeMillis() - startTime;
+			log.info("class={}, method={}, cost_time={}ms", className, methodName, costTime);
 			String key = className + "-" + methodName;
 			methodCount.put(key, methodCount.getOrDefault(key, 0) + 1);
 			List<Integer> costList = methodCost.getOrDefault(key, new ArrayList<>());
@@ -77,8 +79,8 @@ public class MethodMeasureAspect {
 		methodCost.forEach(
 				(method, costList) -> {
 					IntSummaryStatistics stat = costList.stream().collect(Collectors.summarizingInt(x -> x));
-					String info = String.format("method=%s, sum=%d, avg=%dms, max=%dms, min=%dms, count=%d", method,
-							(int) TimeUnit.MILLISECONDS.toSeconds(stat.getSum()), (int) stat.getAverage(), stat.getMax(), stat.getMin(), (int) stat.getCount());
+					String info = String.format("method=%sms, sum=%d, avg=%dms, max=%dms, min=%dms, count=%d", method,
+							(int) stat.getSum(), (int) stat.getAverage(), stat.getMax(), stat.getMin(), (int) stat.getCount());
 					sb.append(info).append('\n');
 				}
 		);

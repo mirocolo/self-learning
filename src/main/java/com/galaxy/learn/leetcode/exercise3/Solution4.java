@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * 滑动窗口优化版本 Java (Assuming ASCII 128)
  */
 @Component("exercise3Solution4")
-public class Solution4 implements SolutionInterface {
+public class Solution4 implements LongestSubstringWithoutRepeatingCharactersInterface {
 	@Override
 	@MethodMonitorAnnotation
 	public int lengthOfLongestSubstring(String s) {

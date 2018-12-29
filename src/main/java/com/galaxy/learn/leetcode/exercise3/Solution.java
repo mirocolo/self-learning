@@ -11,7 +11,7 @@ import java.util.Set;
  * 蛮力方法
  */
 @Component("exercise3Solution")
-public class Solution implements SolutionInterface {
+public class Solution implements LongestSubstringWithoutRepeatingCharactersInterface {
 
 	@Override
 	@MethodMonitorAnnotation
