@@ -7,6 +7,7 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -27,6 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @Aspect
+//@EnableAspectJAutoProxy 开启对aop注解的支持
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class MethodMeasureAspect {
 
 	private Map<String, Integer> methodCount = new ConcurrentHashMap<>();
@@ -46,7 +49,7 @@ public class MethodMeasureAspect {
 			log.error(t.getMessage(), t);
 		} finally {
 			long costTime = System.currentTimeMillis() - startTime;
-			log.info("class={}, method={}, cost_time={}ms", className, methodName, costTime);
+			log.debug("class={}, method={}, cost_time={}ms", className, methodName, costTime);
 			String key = className + "-" + methodName;
 			methodCount.put(key, methodCount.getOrDefault(key, 0) + 1);
 			List<Integer> costList = methodCost.getOrDefault(key, new ArrayList<>());
@@ -65,7 +68,7 @@ public class MethodMeasureAspect {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("MethodCount:\n");
+		StringBuilder sb = new StringBuilder("\nMethodCount:\n");
 		Map<String, Integer> sorted = MapUtils.sortByValue(methodCount);
 		sorted.forEach(
 				(method, count) -> {

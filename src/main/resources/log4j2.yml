@@ -1,0 +1,67 @@
+Configuration:
+  status: info
+  name: logs
+  properties:
+    property:
+      - name: log.level.console
+        value: debug
+      - name: log.path
+        value: logs
+
+  Appenders:
+    Console:
+      name: CONSOLE
+      target: SYSTEM_OUT
+      ThresholdFilter:
+        # 控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）
+        level: ${sys:log.level.console} # “sys:”表示：如果VM参数中没指定这个变量值，则使用本文件中定义的缺省全局变量值
+        onMatch: ACCEPT
+        onMismatch: DENY
+      PatternLayout:
+        pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%logger{0}:%L] %m%n"
+    RollingFile:  # 输出到文件，超过128MB归档
+      - name: InfoFile
+        fileName: ${log.path}/info.log
+        filePattern: ${log.path}/info-%d{yyyy-MM-dd}.log.gz
+        ThresholdFilter:
+          level: info
+          onMatch: ACCEPT
+          onMismatch: DENY
+        PatternLayout:
+          pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%logger{0}:%L] %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+      - name: ErrorFile
+        fileName: ${log.path}/error.log
+        filePattern: ${log.path}/error-%d{yyyy-MM-dd}.log.gz
+        ThresholdFilter:
+          level: error
+          onMatch: ACCEPT
+          onMismatch: DENY
+        PatternLayout:
+          pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%logger{0}:%L] %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: CONSOLE
+        - ref: InfoFile
+        - ref: ErrorFile
+    Logger:
+      - name: com.galaxy.learn.aop.aspect
+        additivity: false
+        level: debug
+        AppenderRef:
+          - ref: CONSOLE
+          - ref: InfoFile
+
+
+
+
+
+
