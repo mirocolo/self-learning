@@ -1,7 +1,6 @@
 package com.galaxy.learn.aop.aspect;
 
 import com.galaxy.learn.util.common.MapUtils;
-import com.galaxy.learn.util.log.Loggers;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -44,7 +43,7 @@ public class MethodMeasureAspect {
 		try {
 			obj = joinPoint.proceed();
 		} catch (Throwable t) {
-			Loggers.errorLogger.error(t.getMessage(), t);
+			log.error(t.getMessage(), t);
 		} finally {
 			long costTime = System.currentTimeMillis() - startTime;
 			log.info("class={}, method={}, cost_time={}ms", className, methodName, costTime);
@@ -70,7 +69,7 @@ public class MethodMeasureAspect {
 		Map<String, Integer> sorted = MapUtils.sortByValue(methodCount);
 		sorted.forEach(
 				(method, count) -> {
-					sb.append("method=" + method + ", " + "count=" + count + '\n');
+					sb.append("method=").append(method).append(", ").append("count=").append(count).append('\n');
 				}
 		);
 		sb.append('\n');
@@ -86,13 +85,6 @@ public class MethodMeasureAspect {
 		);
 
 		sb.append('\n');
-//		sb.append("DetailOfMethodCosts:\n");
-//		methodCost.forEach(
-//				(method, costList) -> {
-//					String info = String.format("method=%s, cost=%s", method, costList);
-//					sb.append(info).append('\n');
-//				}
-//		);
 		return sb.toString();
 	}
 }

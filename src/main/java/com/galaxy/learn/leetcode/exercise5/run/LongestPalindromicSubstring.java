@@ -9,16 +9,18 @@ import com.galaxy.learn.leetcode.exercise5.Exercise5Solution5;
 import com.galaxy.learn.leetcode.exercise5.Exercise5Solution6;
 import com.galaxy.learn.leetcode.exercise5.Exercise5SolutionInterface;
 import com.galaxy.learn.util.common.RandomUtils;
-import com.galaxy.learn.util.log.Loggers;
 import com.galaxy.learn.util.spring.SpringContextUtils;
 
 import java.util.Objects;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created on 2018/12/27. 最长回文子串
  *
  * @author He Xin
  */
+@Slf4j
 public class LongestPalindromicSubstring {
 
 	public static void main(String[] args) {
@@ -47,8 +49,8 @@ public class LongestPalindromicSubstring {
 			assert Objects.equals(result4, result5);
 			assert Objects.equals(result5, result6);
 			i--;
-			Loggers.runLogger.info("i:{}", i);
+			log.info("i:{}", i);
 		}
-		Loggers.monitorLogger.info(SpringContextUtils.getBean(MethodMeasureAspect.class).toString());
+		log.info(SpringContextUtils.getBean(MethodMeasureAspect.class).toString());
 	}
 }

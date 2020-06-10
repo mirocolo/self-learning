@@ -53,7 +53,7 @@ public class RandomUtils {
 				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 		Random random = getRandom();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			buffer.append(chr[random.nextInt(62)]);
 		}
@@ -68,7 +68,7 @@ public class RandomUtils {
 	public static String getLowerLetter(int length) {
 		String str = "abcdefghijklmnopqrstuvwxyz";
 		Random random = getRandom();
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; ++i) {
 			sb.append(str.charAt(random.nextInt(26)));
 		}
@@ -83,7 +83,7 @@ public class RandomUtils {
 	public static String getNumber(int length) {
 		String str = "0123456789";
 		Random random = getRandom();
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; ++i) {
 			sb.append(str.charAt(random.nextInt(10)));
 		}
@@ -98,7 +98,7 @@ public class RandomUtils {
 	public static String getLowerLetterNumber(int length) {
 		String str = "0123456789abcdefghijklmnopqrstuvwxyz0123456789";
 		Random random = getRandom();
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; ++i) {
 			sb.append(str.charAt(random.nextInt(46)));
 		}
