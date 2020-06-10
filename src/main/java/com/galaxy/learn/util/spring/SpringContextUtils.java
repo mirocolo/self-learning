@@ -4,7 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Spring 上下文工具类
@@ -17,7 +17,8 @@ public class SpringContextUtils implements ApplicationContextAware {
 	private static ApplicationContext applicationContext;
 
 	static {
-		applicationContext = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		String[] scanPackages = {"com.galaxy.learn"};
+		applicationContext = new AnnotationConfigApplicationContext(scanPackages);
 	}
 
 	/**

@@ -26,7 +26,7 @@ public class LongestPalindromicSubstring {
 	}
 
 	private static void init() {
-		int i = 100;
+		int i = 2;
 		while (i > 0) {
 			String testStr = RandomUtils.getRandomChar(Integer.MAX_VALUE / 50);
 			Exercise5SolutionInterface solution1 = (Exercise5Solution1) SpringContextUtils.getBean(Exercise5Solution1.class);
