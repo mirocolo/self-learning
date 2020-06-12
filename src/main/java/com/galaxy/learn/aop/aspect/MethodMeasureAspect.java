@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @Aspect
-//@EnableAspectJAutoProxy 开启对aop注解的支持
+//开启对aop注解的支持
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class MethodMeasureAspect {
 
